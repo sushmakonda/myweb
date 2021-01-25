@@ -5,7 +5,7 @@ pipeline{
         PATH = "/opt/maven3/bin:$PATH"
     }
     stages{
-        stage("Git Clone"){
+        stage("Git Checkout"){
             steps{
                 git credentialsId: 'javahome', url: 'https://github.com/sushmakonda/myweb.git'
             }
@@ -20,11 +20,11 @@ pipeline{
             steps{
                 sshagent(['tomcat-new']) {
                 sh """
-                    scp -o StrictHostKeyChecking=no target/myweb.war  ec2-user@172.31.46.179:/home/ec2-user/apache-tomcat-9.0.31/webapps/
+                    scp -o StrictHostKeyChecking=no target/myweb.war  ec2-user@172.31.40.3:/home/ec2-user/apache-tomcat-9.0.31/webapps/
                     
-                    ssh ec2-user@172.31.46.179 /home/ec2-user/apache-tomcat-9.0.31/bin/shutdown.sh
+                    ssh ec2-user@172.31.40.3 /home/ec2-user/apache-tomcat-9.0.31/bin/shutdown.sh
                     
-                    ssh ec2-user@172.31.46.179 /home/ec2-user/apache-tomcat-9.0.31/bin/startup.sh
+                    ssh ec2-user@172.31.40.3 /home/ec2-user/apache-tomcat-9.0.31/bin/startup.sh
                 
                 """
             }
