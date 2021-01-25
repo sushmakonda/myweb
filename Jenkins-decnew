@@ -5,9 +5,9 @@ pipeline{
         PATH = "/opt/maven3/bin:$PATH"
     }
     stages{
-        stage("Git Checkout"){
+        stage("Git Clone"){
             steps{
-                git credentialsId: 'javahome2', url: 'https://github.com/srinivas1987devops/myweb.git'
+                git credentialsId: 'javahome', url: 'https://github.com/sushmakonda/myweb.git'
             }
         }
         stage("Maven Build"){
